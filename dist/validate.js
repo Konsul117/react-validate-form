@@ -92,11 +92,11 @@ var Validate = function (_Component) {
       Object.keys(this.state.validations).forEach(function (field) {
         if (data[field] !== undefined) {
           var fieldErrorMessages = _this2.testForValidation(field, data[field]);
-          allErrors = Object.assign({}, _this2.state.errorMessages, _defineProperty({}, field, fieldErrorMessages));
+          allErrors = Object.assign({}, allErrors, _defineProperty({}, field, fieldErrorMessages));
         }
       });
 
-      errorCount = Validate.checkErrorCount(allErrors);
+      var errorCount = Validate.checkErrorCount(allErrors);
 
       var allValid = errorCount === 0;
 

@@ -50,13 +50,13 @@ class Validate extends Component {
 		    let fieldErrorMessages = this.testForValidation(field, data[field]);
 		    allErrors = Object.assign(
 			    {},
-			    this.state.errorMessages,
+			    allErrors,
 			    { [field]: fieldErrorMessages },
 		    );
 	    }
 	  });
 
-	  errorCount = Validate.checkErrorCount(allErrors);
+	  let errorCount = Validate.checkErrorCount(allErrors);
 
 	  let allValid = (errorCount === 0);
 
