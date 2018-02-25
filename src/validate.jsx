@@ -43,6 +43,32 @@ class Validate extends Component {
     });
   }
 
+  validateAllFields(data) {
+  	let allErrors = {};
+	  Object.keys(this.state.validations).forEach((field) => {
+	  	if (data[field] !== undefined) {
+		    let fieldErrorMessages = this.testForValidation(field, data[field]);
+		    allErrors = Object.assign(
+			    {},
+			    this.state.errorMessages,
+			    { [fieldName]: fieldErrorMessages },
+		    );
+	    }
+	  });
+
+	  errorCount = Validate.checkErrorCount(allErrors);
+
+	  let allValid = (errorCount === 0);
+
+	  this.setState({
+		  errorMessages: allErrors,
+		  errorCount,
+		  allValid: allValid,
+	  });
+
+	  return allValid;
+  }
+
   handleValidate(e) {
     let fieldName = "";
     let fieldValue = "";
