@@ -51,7 +51,7 @@ class Validate extends Component {
 		    allErrors = Object.assign(
 			    {},
 			    this.state.errorMessages,
-			    { [fieldName]: fieldErrorMessages },
+			    { [field]: fieldErrorMessages },
 		    );
 	    }
 	  });
