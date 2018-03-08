@@ -44,7 +44,7 @@ class Validate extends Component {
   }
 
   validateAllFields(data) {
-  	let allErrors = {};
+  	  let allErrors = {};
 	  Object.keys(this.state.validations).forEach((field) => {
 	  	if (data[field] !== undefined) {
 		    let fieldErrorMessages = this.testForValidation(field, data[field]);
@@ -67,6 +67,24 @@ class Validate extends Component {
 	  });
 
 	  return allValid;
+  }
+
+  getErrorsByFields(data) {
+	  let allErrors = {};
+	  Object.keys(this.state.validations).forEach((field) => {
+		  if (data[field] !== undefined) {
+			  let fieldErrorMessages = this.testForValidation(field, data[field]);
+			  if (fieldErrorMessages.length > 0) {
+				  allErrors = Object.assign(
+					  {},
+					  allErrors,
+					  {[field]: fieldErrorMessages},
+				  );
+			  }
+		  }
+	  });
+
+	  return allErrors;
   }
 
   handleValidate(e) {

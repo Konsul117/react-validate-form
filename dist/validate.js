@@ -109,6 +109,23 @@ var Validate = function (_Component) {
       return allValid;
     }
   }, {
+    key: "getErrorsByFields",
+    value: function getErrorsByFields(data) {
+      var _this3 = this;
+
+      var allErrors = {};
+      Object.keys(this.state.validations).forEach(function (field) {
+        if (data[field] !== undefined) {
+          var fieldErrorMessages = _this3.testForValidation(field, data[field]);
+          if (fieldErrorMessages.length > 0) {
+            allErrors = Object.assign({}, allErrors, _defineProperty({}, field, fieldErrorMessages));
+          }
+        }
+      });
+
+      return allErrors;
+    }
+  }, {
     key: "handleValidate",
     value: function handleValidate(e) {
       var fieldName = "";
@@ -141,7 +158,7 @@ var Validate = function (_Component) {
   }, {
     key: "testForValidation",
     value: function testForValidation(field, value) {
-      var _this3 = this;
+      var _this4 = this;
 
       var fieldRequirements = this.state.validations[field];
 
@@ -149,8 +166,8 @@ var Validate = function (_Component) {
       var combinedValidationRules = _.merge({}, _validationRules2.default, this.props.rules);
 
       return fieldRequirements && fieldRequirements.map(function (rule) {
-        if (_this3.ruleHasArgument(rule)) {
-          var _rule$split = rule.split(_this3.state.argumentSeperator),
+        if (_this4.ruleHasArgument(rule)) {
+          var _rule$split = rule.split(_this4.state.argumentSeperator),
               _rule$split2 = _slicedToArray(_rule$split, 2),
               funcName = _rule$split2[0],
               arg = _rule$split2[1];
