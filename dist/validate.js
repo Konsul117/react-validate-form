@@ -75,6 +75,17 @@ var Validate = function (_Component) {
   }
 
   _createClass(Validate, [{
+    key: "componentWillReceiveProps",
+    value: function componentWillReceiveProps(nextProps) {
+      if (this.props.validations !== nextProps.validations) {
+        var validations = _.merge({}, (0, _createValidationRulesFromInput2.default)(this.renderChildren()), nextProps.validations);
+
+        this.setState({
+          validations: validations
+        });
+      }
+    }
+  }, {
     key: "componentWillMount",
     value: function componentWillMount() {
       var validations = _.merge({}, (0, _createValidationRulesFromInput2.default)(this.renderChildren()), this.props.validations);
