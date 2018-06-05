@@ -99,6 +99,8 @@ var Validate = function (_Component) {
     value: function validateAllFields(data) {
       var _this2 = this;
 
+      var showErrors = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
       var allErrors = {};
       Object.keys(this.state.validations).forEach(function (field) {
         if (data[field] !== undefined) {
@@ -111,11 +113,13 @@ var Validate = function (_Component) {
 
       var allValid = errorCount === 0;
 
-      this.setState({
-        errorMessages: allErrors,
-        errorCount: errorCount,
-        allValid: allValid
-      });
+      if (showErrors === true) {
+        this.setState({
+          errorMessages: allErrors,
+          errorCount: errorCount,
+          allValid: allValid
+        });
+      }
 
       return allValid;
     }

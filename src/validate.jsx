@@ -57,7 +57,7 @@ class Validate extends Component {
     });
   }
 
-  validateAllFields(data) {
+  validateAllFields(data, showErrors = true) {
   	  let allErrors = {};
 	  Object.keys(this.state.validations).forEach((field) => {
 	  	if (data[field] !== undefined) {
@@ -74,11 +74,13 @@ class Validate extends Component {
 
 	  let allValid = (errorCount === 0);
 
-	  this.setState({
-		  errorMessages: allErrors,
-		  errorCount,
-		  allValid: allValid,
-	  });
+	  if (showErrors === true) {
+		  this.setState({
+			  errorMessages: allErrors,
+			  errorCount,
+			  allValid: allValid,
+		  });
+	  }
 
 	  return allValid;
   }
