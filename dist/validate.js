@@ -74,27 +74,33 @@ var Validate = function (_Component) {
     return _this;
   }
 
+  // componentWillReceiveProps(nextProps) {
+  //     if (this.props.validations !== nextProps.validations) {
+  //         const validations = _.merge(
+  // 	        {},
+  // 	        createValidationRulesFromInput(this.renderChildren()),
+  // 	        nextProps.validations,
+  //         );
+  //
+  //         this.setState({
+  // 	        validations,
+  //         });
+  //     }
+  // }
+
+  // componentWillMount() {
+  //   const validations = _.merge(
+  //     {},
+  //     createValidationRulesFromInput(this.renderChildren()),
+  //     this.props.validations,
+  //   );
+  //
+  //   this.setState({
+  //     validations,
+  //   });
+  // }
+
   _createClass(Validate, [{
-    key: "componentWillReceiveProps",
-    value: function componentWillReceiveProps(nextProps) {
-      if (this.props.validations !== nextProps.validations) {
-        var validations = _.merge({}, (0, _createValidationRulesFromInput2.default)(this.renderChildren()), nextProps.validations);
-
-        this.setState({
-          validations: validations
-        });
-      }
-    }
-  }, {
-    key: "componentWillMount",
-    value: function componentWillMount() {
-      var validations = _.merge({}, (0, _createValidationRulesFromInput2.default)(this.renderChildren()), this.props.validations);
-
-      this.setState({
-        validations: validations
-      });
-    }
-  }, {
     key: "validateAllFields",
     value: function validateAllFields(data) {
       var _this2 = this;
@@ -102,7 +108,7 @@ var Validate = function (_Component) {
       var showErrors = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
       var allErrors = {};
-      Object.keys(this.state.validations).forEach(function (field) {
+      Object.keys(this.props.validations).forEach(function (field) {
         if (data[field] !== undefined) {
           var fieldErrorMessages = _this2.testForValidation(field, data[field]);
           allErrors = Object.assign({}, allErrors, _defineProperty({}, field, fieldErrorMessages));
@@ -129,7 +135,7 @@ var Validate = function (_Component) {
       var _this3 = this;
 
       var allErrors = {};
-      Object.keys(this.state.validations).forEach(function (field) {
+      Object.keys(this.props.validations).forEach(function (field) {
         if (data[field] !== undefined) {
           var fieldErrorMessages = _this3.testForValidation(field, data[field]);
           if (fieldErrorMessages.length > 0) {
@@ -175,7 +181,7 @@ var Validate = function (_Component) {
     value: function testForValidation(field, value) {
       var _this4 = this;
 
-      var fieldRequirements = this.state.validations[field];
+      var fieldRequirements = this.props.validations[field];
 
       // combine both the built in rules and custom rules
       var combinedValidationRules = _.merge({}, _validationRules2.default, this.props.rules);

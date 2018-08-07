@@ -31,35 +31,35 @@ class Validate extends Component {
     this.testForValidation = this.testForValidation.bind(this);
   }
 
-	componentWillReceiveProps(nextProps) {
-  	    if (this.props.validations !== nextProps.validations) {
-	        const validations = _.merge(
-		        {},
-		        createValidationRulesFromInput(this.renderChildren()),
-		        nextProps.validations,
-	        );
+	// componentWillReceiveProps(nextProps) {
+  	//     if (this.props.validations !== nextProps.validations) {
+	//         const validations = _.merge(
+	// 	        {},
+	// 	        createValidationRulesFromInput(this.renderChildren()),
+	// 	        nextProps.validations,
+	//         );
+	//
+	//         this.setState({
+	// 	        validations,
+	//         });
+    //     }
+	// }
 
-	        this.setState({
-		        validations,
-	        });
-        }
-	}
-
-  componentWillMount() {
-    const validations = _.merge(
-      {},
-      createValidationRulesFromInput(this.renderChildren()),
-      this.props.validations,
-    );
-
-    this.setState({
-      validations,
-    });
-  }
+  // componentWillMount() {
+  //   const validations = _.merge(
+  //     {},
+  //     createValidationRulesFromInput(this.renderChildren()),
+  //     this.props.validations,
+  //   );
+  //
+  //   this.setState({
+  //     validations,
+  //   });
+  // }
 
   validateAllFields(data, showErrors = true) {
   	  let allErrors = {};
-	  Object.keys(this.state.validations).forEach((field) => {
+	  Object.keys(this.props.validations).forEach((field) => {
 	  	if (data[field] !== undefined) {
 		    let fieldErrorMessages = this.testForValidation(field, data[field]);
 		    allErrors = Object.assign(
@@ -87,7 +87,7 @@ class Validate extends Component {
 
   getErrorsByFields(data) {
 	  let allErrors = {};
-	  Object.keys(this.state.validations).forEach((field) => {
+	  Object.keys(this.props.validations).forEach((field) => {
 		  if (data[field] !== undefined) {
 			  let fieldErrorMessages = this.testForValidation(field, data[field]);
 			  if (fieldErrorMessages.length > 0) {
@@ -136,7 +136,7 @@ class Validate extends Component {
   }
 
   testForValidation(field, value) {
-    const fieldRequirements = this.state.validations[field];
+    const fieldRequirements = this.props.validations[field];
 
     // combine both the built in rules and custom rules
     const combinedValidationRules = _.merge({}, validationRules, this.props.rules);
