@@ -74,33 +74,45 @@ var Validate = function (_Component) {
     return _this;
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //     if (this.props.validations !== nextProps.validations) {
-  //         const validations = _.merge(
-  // 	        {},
-  // 	        createValidationRulesFromInput(this.renderChildren()),
-  // 	        nextProps.validations,
-  //         );
-  //
-  //         this.setState({
-  // 	        validations,
-  //         });
-  //     }
-  // }
-
-  // componentWillMount() {
-  //   const validations = _.merge(
-  //     {},
-  //     createValidationRulesFromInput(this.renderChildren()),
-  //     this.props.validations,
-  //   );
-  //
-  //   this.setState({
-  //     validations,
-  //   });
-  // }
-
   _createClass(Validate, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps, prevState) {
+      if (this.props.sessionId !== prevProps.sessionId) {
+        this.setState({
+          errorMessages: {},
+          allValid: false,
+          errorCount: 0
+        });
+      }
+    }
+
+    // componentWillReceiveProps(nextProps) {
+    //     if (this.props.validations !== nextProps.validations) {
+    //         const validations = _.merge(
+    // 	        {},
+    // 	        createValidationRulesFromInput(this.renderChildren()),
+    // 	        nextProps.validations,
+    //         );
+    //
+    //         this.setState({
+    // 	        validations,
+    //         });
+    //     }
+    // }
+
+    // componentWillMount() {
+    //   const validations = _.merge(
+    //     {},
+    //     createValidationRulesFromInput(this.renderChildren()),
+    //     this.props.validations,
+    //   );
+    //
+    //   this.setState({
+    //     validations,
+    //   });
+    // }
+
+  }, {
     key: "validateAllFields",
     value: function validateAllFields(data) {
       var _this2 = this;

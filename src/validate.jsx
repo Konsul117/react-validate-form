@@ -31,6 +31,16 @@ class Validate extends Component {
     this.testForValidation = this.testForValidation.bind(this);
   }
 
+	componentDidUpdate(prevProps, prevState) {
+  	    if (this.props.sessionId !== prevProps.sessionId) {
+  	    	this.setState({
+		        errorMessages: {},
+		        allValid: false,
+		        errorCount: 0,
+	        });
+        }
+	}
+
 	// componentWillReceiveProps(nextProps) {
   	//     if (this.props.validations !== nextProps.validations) {
 	//         const validations = _.merge(
